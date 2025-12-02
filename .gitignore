@@ -80,3 +80,5 @@ fabric.properties
 .idea/
 
 *input.txt
+!input.txt
+!example_input.txt
