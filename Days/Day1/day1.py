@@ -1,6 +1,3 @@
-import math
-from typing import List
-
 from Helper.file_helpers import Lines, getLines
 
 MAX_ROTATION: int = 100
