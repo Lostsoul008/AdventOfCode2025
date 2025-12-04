@@ -1,4 +1,4 @@
-from Helper.file_helpers import Lines, getLines
+from file_helpers import Lines, get_lines
 
 MAX_ROTATION: int = 100
 START_POS: int = 50
@@ -39,9 +39,9 @@ def get_password_new_method(lines: Lines) -> int:
 
 
 def main() -> None:
-	file_input = getLines()
-	print(f'{get_password(file_input) = }')
-	print(f'{get_password_new_method(file_input) = }')
+	file_input: Lines = get_lines(1)
+	print(f'Part 1 = {get_password(file_input)}')
+	print(f'Part 2 = {get_password_new_method(file_input)}')
 
 
 if __name__ == '__main__':
