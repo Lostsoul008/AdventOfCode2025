@@ -3,9 +3,10 @@ from file_helpers import get_lines, Lines
 
 ROLL_CHARACTER = '@'
 ROLL_CUTOFF = 4
+PLACEHOLDER_CHARACTER = 'X'
 
 
-def count_available_rolls(lines: Lines):
+def count_available_rolls(lines: Lines, can_remove: bool = False):
 	x_max: int = len(lines)
 	y_max: int = len(lines[0])
 	result: int = 0
@@ -28,10 +29,17 @@ def count_available_rolls(lines: Lines):
 
 		return nearby_count < ROLL_CUTOFF
 
-	for row, line in enumerate(lines):
-		for col, char in enumerate(line):
-			if char == ROLL_CHARACTER and check_surrounding(row, col):
-				result += 1
+	found: bool = True
+	while found:
+		found = False
+		for row in range(x_max):
+			for col in range(y_max):
+				char = lines[row][col]
+				if char == ROLL_CHARACTER and check_surrounding(row, col):
+					if can_remove:
+						lines[row] = lines[row][:col] + PLACEHOLDER_CHARACTER + lines[row][col + 1:]
+						found = True
+					result += 1
 
 	return result
 
@@ -41,7 +49,7 @@ def main() -> None:
 	file_input = get_lines(4)
 
 	print(f'Part 1: {count_available_rolls(file_input)}')
-
+	print(f'Part 1: {count_available_rolls(file_input, True)}')
 
 if __name__ == '__main__':
 	main()
